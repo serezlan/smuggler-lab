@@ -6,7 +6,7 @@
         mount {:mvn/version "0.1.16"}
         com.taoensso/timbre {:mvn/version "4.10.0"}
             io.netty/netty-all {:mvn/version "4.1.46.Final"}
-netty/extra-codec {:local/root "lib/netty-extra-codec-1.0-SNAPSHOT.jar"}
+netty/extra-codec {:local/root "lib/netty-extra-codec-1.1.0-SNAPSHOT.jar"}
         }
  :aliases
  {:dev

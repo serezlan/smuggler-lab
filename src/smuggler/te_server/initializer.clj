@@ -3,14 +3,15 @@
    [smuggler.te-server.handler :refer [handler]])
   (:import
    (io.netty.channel ChannelInitializer)
-   (io.netty.handler.codec.http HttpRequestDecoder HttpResponseEncoder)
+   (io.netty.handler.codec.http HttpRequestDecoder HttpResponseEncoder ModHttpRequestDecoder)
    ))
 
-(defn init []
+(defn init
+  [{:keys [ignore-transfer-encoding?] :as options}]
   (proxy [ChannelInitializer] []
     (initChannel [ch]
       (let [p (.pipeline ch)]
         (doto p
-          (.addLast (HttpRequestDecoder.))
+          (.addLast (ModHttpRequestDecoder. ignore-transfer-encoding?))
           (.addLast (HttpResponseEncoder.))
           (.addLast (handler)))))))

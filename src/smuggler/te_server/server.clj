@@ -27,14 +27,15 @@
         (.group bg wg)
         (.channel (.getClass (NioServerSocketChannel.)))
         (.handler (LoggingHandler. LogLevel/INFO))
-        (.childHandler (initializer/init)))
+        (.childHandler (initializer/init {:ignore-transfer-encoding? false})))
 
       (let [ch (-> b
                    (.bind port)
                    (.sync)
                    (.channel))]
         (println "System ready at port " port)
-        (.. ch closeFuture sync))))
+        (.. ch closeFuture sync)
+        (println "Disconnecting..."))))
 
 (defstate server
   :start (async/thread (start))

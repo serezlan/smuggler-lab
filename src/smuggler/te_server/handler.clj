@@ -17,7 +17,7 @@
   (let [result (.decoderResult obj)]
     (when-not (.isSuccess result)
       (doto buf
-        (.append ".. WITH DECODER FAILURE")
+        (.append ".. WITH DECODER FAILURE ")
         (.append (.cause result))
         (.append "\r\n")))))
 
@@ -75,7 +75,7 @@
   (let [content (.content msg)]
     (when (.isReadable content)
       (doto sb
-        (.append "Content: ")
+        (.append "Content:\r\n")
         (.append (.toString content CharsetUtil/UTF_8))
         (.append "\r\n"))
       (append-decoder-result sb @request))
@@ -88,12 +88,12 @@
           (.append sb "\r\n")
           (doseq [tn (.names trailing-headers)]
             (doseq [tv (.getAll trailing-headers tn)]
-              (.append (str "Trailing header : " tn " = " tv "\r\n")))))))
+              (.append (str "Trailing header : " tn " = " tv "\r\n"))))))
 
     (when-not (write-response ctx msg)
       (-> ctx
           (.writeAndFlush Unpooled/EMPTY_BUFFER)
-          (.addListener ChannelFutureListener/CLOSE)))))
+          (.addListener ChannelFutureListener/CLOSE))))))
 
 (defn- channel-read-0 [ctx msg]
   (when (instance? HttpRequest msg)
