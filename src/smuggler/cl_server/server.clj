@@ -1,4 +1,4 @@
-(ns smuggler.cl-server
+(ns smuggler.cl-server.server
   (:require
    [clojure.core.async :as async]
    [mount.core :refer [defstate]]
@@ -26,7 +26,7 @@
       (doto b
         (.group bg wg)
         (.channel (.getClass (NioServerSocketChannel.)))
-        (.handler (LoggingHandler. LogLevel/WARN))
+        (.handler (LoggingHandler. LogLevel/INFO))
         (.childHandler (initializer/init {:ignore-transfer-encoding? true})))
 
       (let [ch (-> b
