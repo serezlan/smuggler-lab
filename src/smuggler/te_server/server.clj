@@ -1,4 +1,4 @@
-(ns smuggler.te-server
+(ns smuggler.te-server.server
   (:require
    [clojure.core.async :as async]
    [mount.core :refer [defstate]]
