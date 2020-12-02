@@ -3,9 +3,16 @@
 This is two netty-based server that has been modified for use in HTTP smuggling test.
 
 * Modifications 
+
 - If "Content-Length" header exists together with "Transfer-Encoding", instead of being removed as per default behaviour, it will be left alone
 - On cl-server,if both "Content-Length" and "Transfer-Encoding" header exists together, it will prefer "Content-Length"
+
 * Usage 
+
 - Fire up clojure and load cl-server.clj and te-server.clj on your REPL 
 - Execute (mount.core/start)
 - CL server will be listening on port 4400 and TE server is on port 4000
+
+* Disclaimer 
+
+- This material is provided for educational purpose only. 
